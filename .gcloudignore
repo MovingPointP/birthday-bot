@@ -1,0 +1,6 @@
+.gcloudignore
+.gitignore
+.env.yaml
+README.md
+__pycache__/
+*.pyc
