@@ -1,0 +1,4 @@
+flask==3.*
+functions-framework==3.*
+google-cloud-firestore==2.*
+requests==2.*
