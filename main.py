@@ -41,6 +41,7 @@ def birthday_notify(_request: flask.Request) -> tuple[str, int]:
     docs = get_todays_birthdays(month, day)
 
     if not docs:
+        print(f"No birthdays today. ({month}/{day})")
         return ("No birthdays today.", 200)
 
     errors = []
@@ -51,10 +52,15 @@ def birthday_notify(_request: flask.Request) -> tuple[str, int]:
         message = build_message(name, note)
         try:
             send_discord_message(message)
+            print(f"Notified: {name}")
         except Exception as e:
             errors.append(f"{name}: {e}")
 
     if errors:
-        return (f"Completed with errors: {'; '.join(errors)}", 500)
+        error_msg = f"Completed with errors: {'; '.join(errors)}"
+        print(error_msg)
+        return (error_msg, 500)
 
-    return (f"Notified {len(docs)} birthday(s).", 200)
+    result = f"Notified {len(docs)} birthday(s)."
+    print(result)
+    return (result, 200)
